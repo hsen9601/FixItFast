@@ -20,7 +20,7 @@
 | :--- | :--- |
 | **Backend** | **ASP.NET Core Web API** (.NET 7), **Entity Framework Core** |
 | **Frontend** | **React**, Axios, Vite |
-| **Database** | **SQL Server** (local or Docker) |
+| **Database** | **SQL Server** (local) |
 | **Version Control** | **Git** & **GitHub** |
 
 ---
