@@ -53,7 +53,7 @@ dotnet ef database update
 ```bash
 dotnet run
 ```
-### API will run at: http://localhost:"YOURPORT"/api
+### API will run at: http://localhost:"YOURPORT"/api //typically 5223
 --- 
 # 🎨 Frontend Setup
 ```bash
@@ -65,7 +65,7 @@ npm install
 ```bash
 npm run dev
 ```
-### Frontend will run at: http://localhost:3000
+### Frontend will run at: http://localhost:"YOURPORT" //typically 5713
 --- 
 # 📂 Project Folder Structure:
 ###  FixItFast
