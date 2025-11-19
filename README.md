@@ -1,6 +1,6 @@
 # 🛠️ FixItFast
 
-**FixItFast** is a **full-stack service management platform** where customers can submit service requests and local craftsmen can accept or decline them. Admin users have full system control including moderation and account management. The project showcases essential concepts like **authentication**, **authorization**, **CRUD logic**, **API design**, and **containerized deployment**.
+**FixItFast** is a **full-stack service management platform** where customers can submit service requests and local craftsmen can accept or decline them. Admin users have full system control including moderation and account management. The project showcases essential concepts like **authentication**, **authorization**, **CRUD logic** and **API design**
 
 ---
 
