@@ -1,0 +1,58 @@
+# Visual Studio / .NET Core
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.cache
+*.log
+*.dbmdl
+*.bak
+
+# Build results
+bin/
+obj/
+out/
+
+# ASP.NET Core
+wwwroot/
+appsettings.*.json
+appsettings.Secret.json
+
+# Rider
+.idea/
+
+# VS Code
+.vscode/
+
+# Docker (optional)
+docker-compose.override.yml
+
+# NuGet
+*.nupkg
+*.snupkg
+.nuget/
+packages/
+
+# Resharper
+_ReSharper*/
+*.DotSettings.user
+
+# JetBrains Rider
+.idea/
+*.sln.iml
+
+# Others
+*.db
+*.sqlite
+*.sqlite3
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.DS_Store
