@@ -19,9 +19,8 @@
 | Layer | Technology |
 | :--- | :--- |
 | **Backend** | **ASP.NET Core Web API** (.NET 7), **Entity Framework Core** |
-| **Frontend** | **React**, Axios, Vite or CRA |
+| **Frontend** | **React**, Axios, Vite |
 | **Database** | **SQL Server** (local or Docker) |
-| **Deployment** | **Docker** & **Docker Compose** |
 | **Version Control** | **Git** & **GitHub** |
 
 ---
