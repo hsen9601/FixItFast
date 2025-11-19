@@ -1,0 +1,21 @@
+# Build artifacts
+bin/
+obj/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# VS Code settings
+.vscode/
+
+# EF Core Migrations (optional, wenn du sie tracken willst, sonst auskommentieren)
+# Migrations/
+
+# Environment variables
+*.env
+
+# Logs
+*.log
