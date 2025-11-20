@@ -1,29 +1,20 @@
-import { useState } from "react";
 import "./App.css";
-
-type User = {
-  id: number;
-  fullName: string;
-  mobile: string;
-  email: string;
-  address: string;
-  age: number;
-  type: string;
-};
+import Overview from "./components/Overview/Overview";
+import MainLayout from "./components/MainLayout.tsx/MainLayout";
+import Login from "./components/Login/Login";
+import { Routes, Route } from "react-router";
+import SignUp from "./components/SignUp/SignUp";
 
 function App() {
-  const [users, setUsers] = useState<User[]>([]);
-  const fetchUsers = async () => {
-    const response = await fetch("/api/users");
-    const usersArr = await response.json();
-    setUsers(usersArr);
-  };
   return (
     <>
-      <div>
-        <button onClick={() => fetchUsers()}>FetchUsers</button>
-        {users && users.map((u) => <p key={u.id}>{u.fullName}</p>)}
-      </div>
+      <Routes>
+        <Route element={<MainLayout />}>
+          <Route index element={<Overview />} />
+          <Route path="/Login" element={<Login />} />
+          <Route path="/SignUp" element={<SignUp />} />
+        </Route>
+      </Routes>
     </>
   );
 }
