@@ -32,5 +32,13 @@ namespace WebApi.Services
             await _context.SaveChangesAsync();
             return true;
         }
+        public async Task<User?> LoginAsync(string mail, string password)
+        {
+            return await _context.Users.FirstOrDefaultAsync(u => u.Email == mail && u.Password == password);
+        }
+        public async Task<bool> EmailExistsAsync(string email)
+        {
+            return await _context.Users.AnyAsync(u => u.Email == email);
+        }
     }
 }

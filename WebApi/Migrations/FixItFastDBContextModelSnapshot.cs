@@ -48,6 +48,10 @@ namespace WebApi.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(16)");
 
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(100)");
+
                     b.Property<string>("Type")
                         .IsRequired()
                         .HasColumnType("nvarchar(10)");

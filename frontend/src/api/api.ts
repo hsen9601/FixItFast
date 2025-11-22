@@ -11,11 +11,11 @@ export const GetUsers = async ()=>{
 }
 
 export const CreateUser = async(payload:CreateUserPayload)=>{
-    const response = await api.post('users',payload)
+    const response = await api.post('users/Signup',payload)
     return response.data;
 };
 
 export const Login = async(payload:LoginPayload)=> {
-    const response = await api.post("login",payload);
+    const response = await api.post("users/Login",payload);
     return response.data;
 }

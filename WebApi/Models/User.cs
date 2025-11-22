@@ -21,8 +21,11 @@ namespace WebApi.Models
         public string Address { get; set; } = null!;
         public int Age { get; set; }
 
-        [Column(TypeName = "nvarchar(10)")] 
+        [Column(TypeName = "nvarchar(10)")]
         public string Type { get; set; } = null!;
+
+        [Column(TypeName = "nvarchar(100)")]
+        public string Password { get; set; } = null!;
 
 
 

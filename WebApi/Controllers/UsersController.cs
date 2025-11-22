@@ -7,7 +7,7 @@ namespace WebApi.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class UsersController:ControllerBase
+    public class UsersController : ControllerBase
     {
         private readonly UserService _userService;
         public UsersController(UserService userService)
@@ -17,8 +17,8 @@ namespace WebApi.Controllers
 
         [HttpGet]
         public async Task<IActionResult> GetUsers()
-        { 
-           return Ok(await _userService.GetAllUsersAsync()); 
+        {
+            return Ok(await _userService.GetAllUsersAsync());
         }
 
         [HttpPost]
@@ -42,5 +42,27 @@ namespace WebApi.Controllers
             return user;
         }
 
+        [HttpPost("Login")]
+        public async Task<IActionResult> Login([FromBody] LoginPayload payload)
+        {
+            var user = await _userService.LoginAsync(payload.Email, payload.Password);
+            if (user == null)
+            {
+                return Unauthorized("Invalid email or password");
+            }
+            return Ok(user);
+        }
+        [HttpPost("Signup")]
+        public async Task<IActionResult> Signup(User user)
+        {
+            bool emailExists = await _userService.EmailExistsAsync(user.Email);
+
+            if(emailExists)
+            {
+                return Conflict("Email already exists.");
+            }
+            await _userService.AddUserAsync(user);
+            return Ok(user);
+        }
     }
 }

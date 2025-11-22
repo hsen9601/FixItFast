@@ -10,6 +10,7 @@ export default function SignUp() {
   const [address, setAddress] = useState("");
   const [age, setAge] = useState("");
   const [type, setType] = useState("Customer");
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
   const mutation = useMutation({
@@ -34,6 +35,7 @@ export default function SignUp() {
         address,
         age: age === "" ? null : Number(age),
         type,
+        password,
       };
       console.log("Submit payload", payload);
       mutation.mutate(payload);
@@ -110,6 +112,17 @@ export default function SignUp() {
           // keep value as string to avoid controlled/uncontrolled type flips
           value={age}
           onChange={(e) => setAge(e.target.value)}
+        />
+
+        <label>
+          <b>Password</b>
+        </label>
+        <input
+          name="password"
+          aria-label="password"
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
         />
 
         <label>

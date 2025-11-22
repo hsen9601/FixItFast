@@ -21,7 +21,8 @@ namespace WebApi.Migrations
                     Email = table.Column<string>(type: "nvarchar(100)", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(100)", nullable: false),
                     Age = table.Column<int>(type: "int", nullable: false),
-                    Type = table.Column<string>(type: "nvarchar(10)", nullable: false)
+                    Type = table.Column<string>(type: "nvarchar(10)", nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(100)", nullable: false)
                 },
                 constraints: table =>
                 {

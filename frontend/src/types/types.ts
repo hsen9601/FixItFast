@@ -15,6 +15,7 @@ export type CreateUserPayload = {
   address: string;
   age: number | null;
   type: string;
+  password: string;
 };
 export type LoginPayload = {
   email: string;

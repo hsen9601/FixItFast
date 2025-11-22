@@ -11,7 +11,7 @@ using WebApi.Models;
 namespace WebApi.Migrations
 {
     [DbContext(typeof(FixItFastDBContext))]
-    [Migration("20251119130813_InitialCreate")]
+    [Migration("20251122114503_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -50,6 +50,10 @@ namespace WebApi.Migrations
                     b.Property<string>("Mobile")
                         .IsRequired()
                         .HasColumnType("nvarchar(16)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Type")
                         .IsRequired()

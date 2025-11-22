@@ -13,7 +13,7 @@ export default function SignUp() {
     mutationFn: (payload: LoginPayload) => Login(payload),
     onSuccess: () => {
       alert("Login was successful!");
-      navigate("../Overview");
+      navigate("../");
     },
     onError: (e) => {
       console.error(e);
@@ -70,6 +70,7 @@ export default function SignUp() {
           <input
             name="password"
             aria-label="password"
+            type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
