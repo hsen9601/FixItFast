@@ -1,7 +1,11 @@
-import { useNavigate } from "react-router";
-import { Outlet } from "react-router";
+import { useNavigate, Outlet } from "react-router-dom";
 export default function MainLayout() {
   const navigate = useNavigate();
+
+  const Logout = () => {
+    localStorage.setItem("FixItFast-User", "");
+    navigate("login");
+  };
   return (
     <>
       {/* Header */}
@@ -23,7 +27,7 @@ export default function MainLayout() {
         <h1 style={{ margin: 0, textAlign: "center", color: "black", flex: 1 }}>
           FixItFast
         </h1>
-        <button onClick={() => navigate("Login")}>Logout</button>
+        <button onClick={Logout}>Logout</button>
       </header>
       <main>
         <Outlet />

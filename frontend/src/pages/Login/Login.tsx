@@ -13,6 +13,7 @@ export default function SignUp() {
     mutationFn: (payload: LoginPayload) => Login(payload),
     onSuccess: () => {
       alert("Login was successful!");
+      localStorage.setItem("FixItFast-User", email);
       navigate("../");
     },
     onError: (e) => {
