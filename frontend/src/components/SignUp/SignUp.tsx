@@ -21,7 +21,7 @@ export default function SignUp() {
     },
     onError: (e) => {
       console.error(e);
-      alert("Something went wrong...");
+      alert("Email already exists.");
     },
   });
 

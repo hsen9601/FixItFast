@@ -17,7 +17,7 @@ export default function SignUp() {
     },
     onError: (e) => {
       console.error(e);
-      alert("Something went wrong...");
+      alert("Username or Password were wrong!");
     },
   });
 
