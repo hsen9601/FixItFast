@@ -1,5 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BCrypt.Net;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 using WebApi.Models;
 using WebApi.Services;
 
@@ -10,9 +16,35 @@ namespace WebApi.Controllers
     public class UsersController : ControllerBase
     {
         private readonly UserService _userService;
-        public UsersController(UserService userService)
+        private readonly IConfiguration _configuration;
+        public UsersController(UserService userService, IConfiguration configuration)
         {
             _userService = userService;
+            _configuration = configuration;
+        }
+
+        private string GenerateJwtToken(User user)
+        {
+            var jwtSettings = _configuration.GetSection("Jwt");
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings["Key"]));
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+            var claims = new[]
+            {
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new Claim(JwtRegisteredClaimNames.Email, user.Email),
+                new Claim("role", user.Type ?? "user")
+            };
+
+            var token = new JwtSecurityToken(
+                issuer: jwtSettings["Issuer"],
+                audience: jwtSettings["Audience"],
+                claims: claims,
+                expires: DateTime.Now.AddHours(double.Parse(jwtSettings["ExpireHours"])),
+                signingCredentials: creds
+            );
+
+            return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
         [HttpGet]
@@ -46,23 +78,59 @@ namespace WebApi.Controllers
         public async Task<IActionResult> Login([FromBody] LoginPayload payload)
         {
             var user = await _userService.LoginAsync(payload.Email, payload.Password);
-            if (user == null)
+
+            if (user == null) return Unauthorized("Invalid Email or Passowrd");
+
+            var token = GenerateJwtToken(user);
+
+            return Ok(new
             {
-                return Unauthorized("Invalid email or password");
-            }
-            return Ok(user);
+                token,
+                user = new
+                {
+                    user.Id,
+                    user.FullName,
+                    user.Email,
+                    user.Address,
+                    user.Mobile,
+                    user.Type
+                }
+            });
         }
+
         [HttpPost("Signup")]
         public async Task<IActionResult> Signup(User user)
         {
-            bool emailExists = await _userService.EmailExistsAsync(user.Email);
-
-            if(emailExists)
+            if (await _userService.EmailExistsAsync(user.Email))
             {
                 return Conflict("Email already exists.");
             }
+
+            user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
+
             await _userService.AddUserAsync(user);
-            return Ok(user);
+            return Ok(new { user.Id, user.FullName, user.Email, user.Age, user.Mobile, user.Type });
+
         }
+        [Authorize]
+        [HttpGet("me")]
+        public async Task<IActionResult> GetProfile()
+        {
+            var userId = User?.FindFirstValue(ClaimTypes.NameIdentifier);
+            var user = await _userService.GetUserByIdAsync(int.Parse(userId));
+
+            return Ok(new
+            {
+                user.Id,
+                user.FullName,
+                user.Email,
+                user.Address,
+                user.Mobile,
+                user.Age,
+                user.Type
+            });
+        }
+
+
     }
 }

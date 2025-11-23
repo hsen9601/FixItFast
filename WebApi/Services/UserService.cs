@@ -13,6 +13,8 @@ namespace WebApi.Services
         }
         public Task<List<User>> GetAllUsersAsync() => _context.Users.ToListAsync();
         public Task<User?> GetUserByIdAsync(int id) => _context.Users.FindAsync(id).AsTask();
+        public Task<User?> GetUserByEmailAsync(string email) => _context.Users.FindAsync(email).AsTask();
+
         public async Task AddUserAsync(User user)
         {
             _context.Users.Add(user);
@@ -34,11 +36,20 @@ namespace WebApi.Services
         }
         public async Task<User?> LoginAsync(string mail, string password)
         {
-            return await _context.Users.FirstOrDefaultAsync(u => u.Email == mail && u.Password == password);
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == mail);
+
+            if (user == null)
+                return null;
+
+            bool isValidPassword = BCrypt.Net.BCrypt.Verify(password, user.Password);
+
+            return isValidPassword ? user : null;
         }
+
         public async Task<bool> EmailExistsAsync(string email)
         {
             return await _context.Users.AnyAsync(u => u.Email == email);
         }
+
     }
 }
