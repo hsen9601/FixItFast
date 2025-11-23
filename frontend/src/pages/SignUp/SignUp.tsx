@@ -109,7 +109,6 @@ export default function SignUp() {
           name="age"
           aria-label="Age"
           type="number"
-          // keep value as string to avoid controlled/uncontrolled type flips
           value={age}
           onChange={(e) => setAge(e.target.value)}
         />

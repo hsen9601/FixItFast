@@ -6,6 +6,7 @@ export type User = {
   address: string;
   age: number;
   type: string;
+  password:string
 };
 
 export type CreateUserPayload = {
@@ -17,7 +18,7 @@ export type CreateUserPayload = {
   type: string;
   password: string;
 };
-export type LoginPayload = {
+export type VerificationPayload = {
   email: string;
   password: string;
 };

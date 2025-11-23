@@ -5,6 +5,7 @@ import Login from "./pages/Login/Login";
 import { Routes, Route } from "react-router-dom";
 import SignUp from "./pages/SignUp/SignUp";
 import { ProtectedRoute } from "./components/ProtectedRoute";
+import Profile from "./pages/Profile/Profile";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route element={<ProtectedRoute />}>
           <Route path="/" element={<MainLayout />}>
             <Route index element={<Overview />} />
+            <Route path="/Profile" element={<Profile />} />
           </Route>
         </Route>
       </Routes>
